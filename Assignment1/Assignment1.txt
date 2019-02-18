@@ -1,8 +1,8 @@
 create table customers
-    (name varchar2(20) constraint cust_name_nn not null,
-    email varchar2(30) constraint cust_email_pk primary key,
-    phone varchar2(10),
-    totalPurchase number);
+    	(name varchar2(20) constraint cust_name_nn not null,
+    	email varchar2(30) constraint cust_email_pk primary key,
+   	phone varchar2(10),
+    	totalPurchase number);
    
 create table video 
 	  (vID varchar2(10) constraint video_vID_nn not null,
