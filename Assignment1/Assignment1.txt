@@ -1,0 +1,44 @@
+create table customers
+    (name varchar2(20) constraint cust_name_nn not null,
+    email varchar2(30) constraint cust_email_pk primary key,
+    phone varchar2(10),
+    totalPurchase number);
+   
+create table video 
+	  (vID varchar2(10) constraint video_vID_nn not null,
+	  name varchar2(30) constraint video_name_nn not null,
+	  year number constraint video_year_nn not null,
+	  cost number,
+	  genre varchar(10) constraint video_genre_nn not null,
+	  constraint video_vID_pk primary key(vID));
+
+create table price 
+	  (priceCode varchar(20) constraint price_priceCode_pk primary key,
+	  cost number constraint price_cost_nn not null);
+  
+  create table actor
+	  (aID varchar(20) constraint actor_aID_nn not null,
+	  name varchar(20) constraint actor_name_nn not null,
+	  dob date,
+	  constraint actor_aID_pk primary key(aID));
+  
+  create table performs
+	  (vID varchar2(10) constraint performs_vID_nn not null,
+	  aID varchar2(10) constraint performs_aID_nn not null,
+	  constraint performs_fk_vID foreign key(vID) references video,
+	  constraint performs_fk_aID foreign key(aID) references actor,
+	  constraint performs_pk primary key(vID,aID));
+  
+  create table rents
+	  (email varchar2(30) constraint rent_email_nn not null,
+	  vID varchar2(10) constraint rent_vID_nn not null,
+	  priceCode varchar2(20),
+	  rentalFee number,
+	  lateFee number,
+	  rentDate date constraint rents_date_nn not null,
+	  dueDate date constraint rent_dueDate_nn not null,
+	  returnDate date,
+	  constraint rents_email_fk foreign key(email) references customers,
+	  constraint rents_vID_fk foreign key(vID) references video,
+	  constraint rents_priceCode_fk foreign key(priceCode) references price,
+	  constraint rent_pk primary key (email,vID,rentDate));
